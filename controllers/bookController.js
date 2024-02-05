@@ -135,7 +135,12 @@ exports.createRating = (req, res, next) => {
                   newRatings.push(ratingObject);
                   // Création d'un tableau regroupant toutes les notes du livre, et calcul de la moyenne des notes
                   const grades = newRatings.map(rating => rating.grade);
-                  const averageGrades = average.average(grades);
+                  //const averageGrades = average.average(grades);
+                  let some = 0;
+                  for( let grade of grades){
+                    some +=  grade;
+                  }
+                  const averageGrades = (some /grades.length).toFixed(1);
                   book.averageRating = averageGrades;
                   // Mise à jour du livre avec la nouvelle note ainsi que la nouvelle moyenne des notes
                   Book.updateOne({ _id: req.params.id }, { ratings: newRatings, averageRating: averageGrades, _id: req.params.id })
