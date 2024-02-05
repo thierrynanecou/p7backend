@@ -3,13 +3,13 @@ const mongoose = require("mongoose");
 const path = require("path");
 const bookRoutes = require('./routes/bookRoute');
 const userRoutes = require('./routes/userRoute');
-
+require("dotenv").config();
 const app = express(); // Initialisation de l'application Express
 
 app.use(express.json());
 
 mongoose
-  .connect("mongodb+srv://thierryn:Zwopmaxy@thierry.1tl6cuj.mongodb.net/", { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(process.env.DB, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("Connexion à MongoDB réussie !"))
   .catch(() => console.log("Connexion à MongoDB échouée !"));
 
